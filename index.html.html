@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>The Psychic Game</title>
+</head>
+<body>
+
+<!-- This is where the code will go that we created. -->
+<div id="game">
+	<h1>The Psychic Game</h1>
+
+	<p>Guess what letter I'm thinking of</p>
+	<p>Wins:</p>
+	<p>Losses:</p>
+	<p>Guesses Left: 5</p>
+	<p>Your Guesses so far:</p>
+
+</div>
+
+<script type="text/javascript">
+
+// Sets the computer choices 
+var computerChoices = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+
+// Declares the tallies to 0 
+var wins = 0;
+var losses = 0;
+var guesses = 5;
+var guessArr = [];
+
+// This sets the computer guess equal to the random.
+var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+console.log(computerGuess);
+
+// When the user presses the key it records the keypress and then sets it to userguess
+document.onkeyup = function(event) {
+	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+
+
+
+
+
+		// It tests to determine if the computer or the user won the round and then increments 
+		if (userGuess == computerGuess){
+			wins++;
+			alert("You Guessed Correctly!");
+			computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+			console.log(computerGuess);
+		}
+		else{
+			guessArr.push(userGuess);
+			guesses+=-1;
+			console.log(guessArr);
+
+
+		}
+
+		if (guesses == 0){
+			alert("You ran out of guesses. Try again!");
+			guesses = 5;
+			guessArr = [];
+		}
+		
+
+
+		// Taking the tallies and displaying them in HTML
+		var html = "<h1>The Psychic Game</h1>" +
+		"<p>Guess what letter I'm thinking of" +
+		"<p>Wins: " + 
+		wins + 
+		"</p>" +
+		"<p>Losses: " + 
+		losses + 
+		"</p>" +
+		"<p>Guesses Left: " + 
+		guesses + 
+		"</p>" +
+		"Your Guesses so far: " +
+		guessArr;
+
+		// Placing the html into the game ID
+		document.querySelector('#game').innerHTML = html;
+
+	
+}
+
+</script>
+</body>
+</html>
+
